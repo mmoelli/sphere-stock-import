@@ -4,3 +4,9 @@ package_json = require '../package.json'
 module.exports = class extends Logger
 
   @appName: "#{package_json.name}-#{package_json.version}"
+
+  @silent: false
+
+  info: (msg) ->
+    console.info msg unless @silent
+    super msg

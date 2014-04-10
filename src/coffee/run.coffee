@@ -25,11 +25,13 @@ argv = require('optimist')
   .describe('sftpFileRegex', 'a RegEx to filter files when downloading them')
   .describe('logLevel', 'log level for file logging')
   .describe('logDir', 'directory to store logs')
+  .describe('silent', 'supress logging to stdout')
   .describe('timeout', 'Set timeout for requests')
   .default('skuHeader', 'sku')
   .default('quantityHeader', 'quantity')
   .default('logLevel', 'info')
   .default('logDir', '.')
+  .default('silent', false)
   .default('timeout', 60000)
   .demand(['projectKey'])
   .argv
@@ -39,6 +41,8 @@ logger = new Logger
     { level: 'error', stream: process.stderr }
     { level: argv.logLevel, path: "#{argv.logDir}/sphere-stock-xml-import_#{argv.projectKey}.log" }
   ]
+
+logger.silent = argv.silent
 
 process.on 'SIGUSR2', -> logger.reopenFileStreams()
 
@@ -117,8 +121,12 @@ credentialsConfig = ProjectCredentialsConfig.create()
 
   if file
     importFn(stockimport, file)
-    .then -> process.exit 0
-    .fail (code) -> process.exit code
+    .then (msg) ->
+      logger.info info: msg, msg
+      process.exit 0
+    .fail (code) ->
+      logger.info error: code, code
+      process.exit code
     .done()
   else
     sftpHelper = new SftpHelper
@@ -145,6 +153,6 @@ credentialsConfig = ProjectCredentialsConfig.create()
       process.exit(1)
     .done()
 .fail (err) ->
-  logger.error e, "Problems on getting client credentials from config files."
+  logger.error err, "Problems on getting client credentials from config files."
   process.exit(1)
 .done()
