@@ -1,0 +1,68 @@
+{
+  "name": "sphere-stock-import",
+  "description": "Import your stock data into SPHERE.IO's inventory from XML or CSV.",
+  "version": "0.5.11",
+  "homepage": "https://github.com/sphereio/sphere-stock-import",
+  "private": false,
+  "author": {
+    "name": "Hajo Eichler",
+    "email": "hajo.eichler@commercetools.de"
+  },
+  "maintainers": [
+    {
+      "name": "Nicola Molinari",
+      "email": "nicola.molinari@commercetools.de"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sphereio/sphere-stock-import.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sphereio/sphere-stock-import/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/sphereio/sphere-stock-import/blob/master/LICENSE-MIT"
+    }
+  ],
+  "bin": {
+    "stock-import": "bin/stock-import"
+  },
+  "main": "main.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt coverage"
+  },
+  "dependencies": {
+    "bunyan-logentries": "0.1.0",
+    "csv": "0.3.7",
+    "optimist": "0.6.1",
+    "q": "1.0.0",
+    "q-io": "1.11.0",
+    "sphere-node-client": "0.7.2",
+    "sphere-node-sync": "0.5.5",
+    "sphere-node-utils": "0.4.11",
+    "tmp": "0.0.23",
+    "underscore": "1.6.0",
+    "xml2js": "0.4.2"
+  },
+  "devDependencies": {
+    "coveralls": "2.10.0",
+    "grunt": "0.4.4",
+    "grunt-bump": "0.0.13",
+    "grunt-coffeelint": "0.0.8",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-contrib-coffee": "0.10.1",
+    "grunt-contrib-concat": "0.4.0",
+    "grunt-contrib-watch": "0.6.1",
+    "grunt-shell": "0.6.4",
+    "istanbul": "0.2.7",
+    "jasmine-node": "1.13.0",
+    "sphere-coffeelint": "git://github.com/sphereio/sphere-coffeelint.git#master"
+  },
+  "keywords": []
+}
